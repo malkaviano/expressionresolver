@@ -1,6 +1,6 @@
 # Expression Resolver
 Dynamic Expression Resolver
 
-Static Type checking dynamic expression resolver
+Static type checked dynamic expression resolver
 
 WIP
