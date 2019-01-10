@@ -4,7 +4,7 @@
 		module="expressionresolver_2.12"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20190108174210"
+		publication="20190109214602"
 	>
 		<description>
 		ExpressionResolver
@@ -34,5 +34,6 @@
 		<dependency org="org.scala-lang" name="scala-library" rev="2.12.8" conf="scala-tool->default,optional(default);compile->default(compile)"/>
 		<dependency org="org.scalatest" name="scalatest_2.12" rev="3.0.5" conf="test->default(compile)"/>
 		<dependency org="org.scalamock" name="scalamock_2.12" rev="4.1.0" conf="test->default(compile)"/>
+		<dependency org="joda-time" name="joda-time" rev="2.10.1" conf="compile->default(compile)"/>
 	</dependencies>
 </ivy-module>
