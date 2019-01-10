@@ -2,7 +2,7 @@ package malkaviano.operators.logical
 
 import malkaviano.operators.{BooleanOperator}
 
-case class AndOperator[A](
+case class AndOperator(
                         operand1: BooleanOperator,
                         operand2: BooleanOperator
                         ) extends BooleanOperator {
