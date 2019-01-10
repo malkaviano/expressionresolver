@@ -4,7 +4,7 @@
 		module="expressionresolver$sources"
 		revision="0.1.0-SNAPSHOT"
 		status="integration"
-		publication="20190108174216"
+		publication="20190109214712"
 	/>
 	<configurations>
 		<conf name="compile" visibility="public" description=""/>
@@ -44,6 +44,10 @@
 		</dependency>
 		<dependency org="org.scala-lang" name="scala-compiler" rev="2.12.8" transitive="false" conf="scala-tool->default,compile,runtime,optional,optional(default),master">
 			<artifact name="scala-compiler" type="src" ext="jar" conf="*" e:classifier="sources"/>
+			<include name="*" type="*" ext="*" conf="" matcher="exact"/>
+		</dependency>
+		<dependency org="joda-time" name="joda-time" rev="2.10.1" transitive="false" conf="compile->default,compile,runtime,default(compile),master;runtime->default,compile,runtime,default(compile),master;test->default,compile,runtime,default(compile),master;compile-internal->default,compile,runtime,default(compile),master;runtime-internal->default,compile,runtime,default(compile),master;test-internal->default,compile,runtime,default(compile),master">
+			<artifact name="joda-time" type="src" ext="jar" conf="*" e:classifier="sources"/>
 			<include name="*" type="*" ext="*" conf="" matcher="exact"/>
 		</dependency>
 		<dependency org="org.scala-lang" name="scala-reflect" rev="2.12.8" transitive="false" conf="test->compile,runtime(*),master(compile),runtime,compile(*),master;test-internal->compile,runtime(*),master(compile),runtime,compile(*),master;scala-tool->compile,runtime(*),master(compile),runtime,compile(*),master" info.apiURL="http://www.scala-lang.org/api/2.12.8/">

@@ -1,0 +1,4 @@
+[error] /home/malkaviano/IdeaProjects/expressionresolver/project/Dependencies.scala:6:27: not found: value libraryDependencies
+[error]   lazy val jodaDatetime = libraryDependencies += "joda-time" % "joda-time" % "2.10.1"
+[error]                           ^
+[error] one error found
