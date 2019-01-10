@@ -3,7 +3,7 @@ package malkaviano.operators.property
 import org.joda.time.DateTime
 import org.scalatest.{FunSpec, Matchers}
 
-class DatePropertySpec extends FunSpec with Matchers  {
+class ValuePropertySpec extends FunSpec with Matchers  {
 
   describe("Evaluating") {
     case class Fake(date: DateTime, str: String)
@@ -15,18 +15,18 @@ class DatePropertySpec extends FunSpec with Matchers  {
       describe("when it is a Date") {
         val expected = date
 
-        val result = DateProperty("date", fake).evaluate
+        val result = ValueProperty[DateTime]("date", fake).evaluate
 
         result shouldBe expected
       }
 
       describe("when it is not a Date") {
-        an [ClassCastException] should be thrownBy DateProperty("str", fake).evaluate
+        an [ClassCastException] should be thrownBy ValueProperty[DateTime]("str", fake).evaluate
       }
     }
 
     describe("when value does not exist") {
-      an [ClassCastException] should be thrownBy DateProperty("str", fake).evaluate
+      an [ClassCastException] should be thrownBy ValueProperty[DateTime]("str", fake).evaluate
     }
   }
 }

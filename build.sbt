@@ -10,7 +10,7 @@ lazy val root = (project in file("."))
     name := "ExpressionResolver",
     libraryDependencies += scalaTest % Test,
     libraryDependencies += scalaMock % Test,
-    libraryDependencies += jodaTime
+    libraryDependencies += nscalaTime
   )
 
 // Uncomment the following for publishing to Sonatype.

@@ -1,8 +1,8 @@
 package malkaviano.operators.comparison
 
-import malkaviano.operators.{BooleanOperator}
+import malkaviano.operators.{BooleanOperator, Operator}
 
-case class EqualToOperator(operand1: Any, operand2: Any) extends BooleanOperator {
+case class EqualToOperator[A](operand1: Operator[A], operand2:  Operator[A]) extends BooleanOperator {
   override def evaluate: Boolean = {
     operand1 == operand2
   }

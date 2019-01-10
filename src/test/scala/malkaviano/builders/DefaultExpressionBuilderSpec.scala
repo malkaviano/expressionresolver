@@ -33,27 +33,6 @@ class DefaultExpressionBuilderSpec extends FunSpec with Matchers {
             |	]
             |}
           """.stripMargin
-
-        case class Example(age: Int, birthdate: DateTime)
-
-        val fake = Example(age = 17, birthdate = DateTime.parse("2010-01-01"))
-
-        val expected = OrOperator(
-          LessThanOperator(
-            17,
-            18
-          ),
-          NotOperator(
-            EqualToOperator(
-              DateTime.parse("2010-01-01"),
-              DateTime.parse("1990-01-01")
-            )
-          )
-        )
-
-        val result = (new DefaultExpressionBuilder).fromJson(json)
-
-        result shouldBe expected
       }
     }
 }
