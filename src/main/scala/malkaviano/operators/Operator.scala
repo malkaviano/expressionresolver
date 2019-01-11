@@ -1,5 +1,5 @@
 package malkaviano.operators
 
-trait Operator[T] {
+trait Operator[+T] {
   def evaluate: T
 }
