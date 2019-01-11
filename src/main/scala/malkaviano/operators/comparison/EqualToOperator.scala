@@ -4,6 +4,6 @@ import malkaviano.operators.{BooleanOperator, Operator}
 
 case class EqualToOperator[A](operand1: Operator[A], operand2:  Operator[A]) extends BooleanOperator {
   override def evaluate: Boolean = {
-    operand1 == operand2
+    operand1.evaluate == operand2.evaluate
   }
 }

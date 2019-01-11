@@ -59,6 +59,8 @@ class DefaultParser(obj: Any) {
               } else {
                 operators.push(EqualToOperator(dateOperands.pop, dateOperands.pop))
               }
+              println(operators.head)
+              println(operators.head.evaluate)
             }
             case Operators.LESS => {
               if (textOperands.nonEmpty) {

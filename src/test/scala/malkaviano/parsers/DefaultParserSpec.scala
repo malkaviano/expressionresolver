@@ -15,17 +15,7 @@ class DefaultParserSpec extends FunSpec with Matchers {
 
   describe("Parsing tokens") {
     it("returns a tree of operators to evaluate") {
-      /*
-          [
-            AndToken
-            Less
-            Literal 4, "INT"
-            Property "age", "INT"
-            Eq
-            Literal "xpto", "TEXT"
-            Property "name", "TEXT"
-          ]
-       */
+
       val tokens: Seq[Any] = Seq(
         OperatorToken(Operators.AND),
         OperatorToken(Operators.LESS),
