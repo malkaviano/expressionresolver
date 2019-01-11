@@ -12,25 +12,45 @@ class OptionalPropertySpec extends FunSpec with Matchers  {
     val fake = Fake(date, "wrong")
 
     describe("when value exists") {
-      describe("when it is a Date") {
-        val expected = date
+      describe("when it is an Option field") {
+        it("returns the Date") {
+          val expected = date
 
-        val result = OptionalProperty[DateTime]("date", fake).evaluate
+          val result = OptionalProperty[DateTime]("date", fake).evaluate
 
-        result shouldBe expected
+          result shouldBe expected
+        }
       }
 
-      describe("when it is not a Date") {
-        an [ClassCastException] should be thrownBy OptionalProperty[DateTime]("str", fake).evaluate
+      describe("when it is not an Option Field") {
+        it("returns None") {
+          val expected = Option("wrong")
+
+          val result =  OptionalProperty[String]("str", fake).evaluate
+
+          result shouldBe expected
+        }
+      }
+
+      describe("when it is the wrong type") {
+        it("returns None") {
+          val expected = Option.empty[DateTime]
+
+          val result =  OptionalProperty[DateTime]("str", fake).evaluate
+
+          result shouldBe expected
+        }
       }
     }
 
     describe("when value does not exist") {
-      val expected = Option.empty[DateTime]
+      it("returns None") {
+        val expected = Option.empty[DateTime]
 
-      val result = OptionalProperty[DateTime]("nonexistant", fake).evaluate
+        val result = OptionalProperty[DateTime]("nonexistant", fake).evaluate
 
-      result shouldBe expected
+        result shouldBe expected
+      }
     }
   }
 }
