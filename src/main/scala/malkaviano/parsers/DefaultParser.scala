@@ -26,7 +26,7 @@ case class DefaultParser(
 
     reversed.foreach {
       case lt: LiteralToken => {
-        lt.tag match {
+        lt.tag.toUpperCase match {
           case Tags.TEXT => textOperands.push(Literal(lt.value.toString))
           case Tags.NUMBER => numericOperands.push(Literal(lt.value.toString.toInt))
           case Tags.DECIMAL => decimalOperands.push(Literal(lt.value.toString.toDouble))
@@ -34,7 +34,7 @@ case class DefaultParser(
         }
       }
       case prop: PropertyToken => {
-        prop.tag match {
+        prop.tag.toUpperCase match {
           case Tags.TEXT => textOperands.push(OptionalProperty[String](prop.name, obj))
           case Tags.NUMBER => numericOperands.push(OptionalProperty[Int](prop.name, obj))
           case Tags.DECIMAL => decimalOperands.push(OptionalProperty[Double](prop.name, obj))

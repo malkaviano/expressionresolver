@@ -1,7 +1,7 @@
 package malkaviano.parsers
 
 import malkaviano.operators.comparison.{EqualToOperator, LessThanOperator}
-import malkaviano.operators.logical.AndOperator
+import malkaviano.operators.logical.{AndOperator, NotOperator}
 import malkaviano.operators.property.OptionalProperty
 import malkaviano.operators.value.Literal
 import malkaviano.tokens._
@@ -21,11 +21,12 @@ class DefaultParserSpec extends FunSpec with Matchers {
       val tokens = Seq(
         OperatorToken(Operators.AND),
         OperatorToken(Operators.LESS),
-        LiteralToken(4, Tags.NUMBER),
-        PropertyToken("age", Tags.NUMBER),
+        LiteralToken(4, "number"),
+        PropertyToken("age", "number"),
+        OperatorToken(Operators.NOT),
         OperatorToken(Operators.EQ),
-        LiteralToken("1990-01-01", Tags.DATE),
-        PropertyToken("birth", Tags.DATE)
+        LiteralToken("1990-01-01", "date"),
+        PropertyToken("birth", "date")
       )
 
       val expected = AndOperator(
@@ -33,9 +34,11 @@ class DefaultParserSpec extends FunSpec with Matchers {
           Literal(4),
           OptionalProperty[Int]("age", obj)
         ),
-        EqualToOperator(
-          Literal(date),
-          OptionalProperty[String]("birth", obj)
+        NotOperator(
+          EqualToOperator(
+            Literal(date),
+            OptionalProperty[DateTime]("birth", obj)
+          )
         )
       )
 
