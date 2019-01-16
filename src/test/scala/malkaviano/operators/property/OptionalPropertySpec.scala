@@ -13,7 +13,7 @@ class OptionalPropertySpec extends FunSpec with Matchers  {
 
     describe("when value exists") {
       describe("when it is an Option field") {
-        it("returns the Date") {
+        it("returns the Field") {
           val expected = date
 
           val result = OptionalProperty[DateTime]("date", fake).evaluate
@@ -23,7 +23,7 @@ class OptionalPropertySpec extends FunSpec with Matchers  {
       }
 
       describe("when it is not an Option Field") {
-        it("returns None") {
+        it("returns the Field") {
           val expected = Option("wrong")
 
           val result =  OptionalProperty[String]("str", fake).evaluate
