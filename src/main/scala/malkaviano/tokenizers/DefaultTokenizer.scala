@@ -4,8 +4,6 @@ import malkaviano.tokens.{LiteralToken, OperatorToken, Operators, PropertyToken}
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
 
-import scala.annotation.tailrec
-
 class DefaultTokenizer {
   implicit val formats = org.json4s.DefaultFormats
 
