@@ -22,15 +22,15 @@ jobs:
       - checkout
       - restore_cache:
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-          key: sbt-cache
+          key: expressionresolver-cache
       - run:
           name: Compile expressionresolver
-          command: cat /dev/null | sbt clean update dist
+          command: cat /dev/null | sbt clean
       #- store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
       #    path: target/universal/expressionresolver.zip
       #    destination: expressionresolver
       - save_cache:
-          key: sbt-cache
+          key: expressionresolver-cache
           paths:
             - "~/.ivy2/cache"
             - "~/.sbt"
