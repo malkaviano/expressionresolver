@@ -1,5 +1,7 @@
 # Expression Resolver
 
+[![CircleCI](https://circleci.com/gh/malkaviano/expressionresolver.svg?style=svg)](https://circleci.com/gh/malkaviano/expressionresolver)
+
 It was originally created for custom querying a collection 
 
 Static type check and customizable filtering for collections, based on json input filter your collections with on the fly created queries.
