@@ -42,7 +42,7 @@ class DefaultParserSpec extends FunSpec with Matchers {
         )
       )
 
-      val result = DefaultParser(obj).parse(tokens)
+      val result = new DefaultParser(obj).parse(tokens)
 
       result shouldBe expected
     }

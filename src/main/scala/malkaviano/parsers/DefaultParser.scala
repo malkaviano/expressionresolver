@@ -11,10 +11,10 @@ import org.joda.time.format.ISODateTimeFormat
 
 import scala.collection.mutable
 
-case class DefaultParser(
-                          obj: Any,
-                          dateParser: String => DateTime = ISODateTimeFormat.date.withZone(DateTimeZone.UTC).parseDateTime
-                        ) {
+class DefaultParser(
+                     obj: Any,
+                     dateParser: String => DateTime = ISODateTimeFormat.date.withZone(DateTimeZone.UTC).parseDateTime
+                   ) {
   def parse(tokens: Seq[Any]): BooleanOperator = {
     val reversed = tokens.reverse
 

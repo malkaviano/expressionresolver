@@ -46,7 +46,7 @@ class DefaultTokenizerSpec extends FunSpec with Matchers {
         PropertyToken("birth", "date")
       )
 
-      val result = DefaultTokenizer().generate(json)
+      val result = new DefaultTokenizer().generate(json)
 
       result shouldBe expected
     }
