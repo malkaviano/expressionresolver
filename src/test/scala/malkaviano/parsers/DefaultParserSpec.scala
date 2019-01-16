@@ -9,10 +9,11 @@ import org.joda.time.DateTime
 import org.scalatest.{FunSpec, Matchers}
 
 class DefaultParserSpec extends FunSpec with Matchers {
+  val date = DateTime.parse("1990-01-01T00:00:00Z")
 
   case class Obj(name: String, age: Option[Int], birth: DateTime)
 
-  val obj = Obj("xpto", Option(10), DateTime.parse("1990-01-01T00:00:00Z"))
+  val obj = Obj("xpto", Option(10), date)
 
   describe("Parsing tokens") {
     it("returns a tree of operators to evaluate") {
@@ -33,7 +34,7 @@ class DefaultParserSpec extends FunSpec with Matchers {
           OptionalProperty[Int]("age", obj)
         ),
         EqualToOperator(
-          Literal(DateTime.parse("1990-01-01T00:00:00Z")),
+          Literal(date),
           OptionalProperty[String]("birth", obj)
         )
       )

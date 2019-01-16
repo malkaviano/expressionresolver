@@ -6,4 +6,6 @@ case object Operators {
   val NOT = "NOT"
   val LESS = "LESS"
   val EQ = "EQ"
+  val LITERAL = "LITERAL"
+  val PROPERTY = "PROP"
 }

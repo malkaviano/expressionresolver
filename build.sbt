@@ -10,6 +10,7 @@ lazy val root = (project in file("."))
       "org.scalatest" %% "scalatest" % "3.0.5" % Test,
       "org.scalamock" %% "scalamock" % "4.1.0" % Test,
       "com.github.nscala-time" %% "nscala-time" % "2.20.0",
+      "org.json4s" %% "json4s-jackson" % "3.6.3",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
     )
   )
