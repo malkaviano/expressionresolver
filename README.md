@@ -1,4 +1,6 @@
-# Expression Resolver for custom querying a collection 
+# Expression Resolver
+
+It was originally created for custom querying a collection 
 
 Static type check and customizable filtering for collections, based on json input filter your collections with on the fly created queries.
 
