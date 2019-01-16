@@ -38,7 +38,7 @@ class DefaultTokenizerSpec extends FunSpec with Matchers {
       val expected: Seq[Any] = Seq(
         OperatorToken(Operators.AND),
         OperatorToken(Operators.LESS),
-        LiteralToken("4", "number"),
+        LiteralToken(4, "number"),
         PropertyToken("age", "number"),
         OperatorToken(Operators.NOT),
         OperatorToken(Operators.EQ),

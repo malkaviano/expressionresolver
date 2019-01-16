@@ -22,8 +22,7 @@ case class DefaultTokenizer() {
       tokens ++ Seq(LiteralToken(
         values
           .asInstanceOf[Seq[Any]]
-          .head
-          .toString,
+          .head,
         tag.get
       ))
     } else if (oper == Operators.PROPERTY) {
