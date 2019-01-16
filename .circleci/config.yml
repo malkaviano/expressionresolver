@@ -24,7 +24,7 @@ jobs:
           # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
           key: sbt-cache
       - run:
-          name: Compile samplescala dist package
+          name: Compile expressionresolver
           command: cat /dev/null | sbt clean update dist
       #- store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
       #    path: target/universal/expressionresolver.zip
