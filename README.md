@@ -8,32 +8,51 @@ It accepts: String, Int, Double and Date (Joda)
 
 Example:
 
-`
+Given a case class
+
+<code>
+   case class Something(
+                        name: String,
+                        birth: Option[DateTime],
+                        commendations: Int
+                      )
+</code>
+
+And a collection
+
+<code>
+Seq(
+        Something("Rafael", Option(DateTime.parse("1980-02-15")), 10),
+        Something("Thiago", None, 0),
+        Something("Camilla", Option(DateTime.parse("1900-12-30")), 5),
+        Something("Juliana", None, 50),
+      )
+</code>
+
+The following json will filter only Camilla record
+
+<code>
 {
-   "oper" : "and",
-   "values" : [
-     {
-       "oper" : "less",
-       "values" : [
-         { "oper" : "literal", "values": [ 4 ], "tag" : "number" },
-         { "oper" : "prop", "values": [ "age" ], "tag" : "number" }
-       ]
-     },
-     {
-       "oper" : "not",
-       "values" : [
-         {
-           "oper" : "eq",
-           "values" : [
-             { "oper" : "literal", "values": [ "1990-01-01" ], "tag" : "date" },
-             { "oper" : "prop", "values": [ "birth" ], "tag" : "date" }
-           ]
-         }
-       ]
-     }
-   ]
+ "oper" : "and",
+ "values" : [
+   {
+     "oper" : "less", "values" : [
+       {"oper" : "prop", "values" : [ "commendations" ], "tag" : "number" },
+       {"oper" : "literal", "values" : [ 10 ], "tag" : "number" }
+     ]
+   },
+   {
+     "oper" : "not", "values" : [
+       { "oper" : "eq", "values" : [
+           {"oper" : "literal", "values" : [ "Thiago" ], "tag" : "text" },
+           {"oper" : "prop", "values" : [ "name" ], "tag" : "text" }
+         ]
+       }
+     ]
+   }
+ ]
 }
-`
+</code>
 
 This is a POC, it's not intended to be used in production as it is
 
