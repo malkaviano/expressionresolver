@@ -4,6 +4,8 @@ import malkaviano.tokens.{LiteralToken, OperatorToken, Operators, PropertyToken}
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
 
+import scala.annotation.tailrec
+
 class DefaultTokenizer {
   implicit val formats = org.json4s.DefaultFormats
 
@@ -17,7 +19,7 @@ class DefaultTokenizer {
     if (Seq(Operators.AND, Operators.OR, Operators.NOT, Operators.EQ, Operators.LESS).contains(oper)) {
       OperatorToken(oper)
 
-      processList(values.asInstanceOf[Seq[Map[String, Any]]], tokens :+ OperatorToken(oper))
+      jsonParse(values, tokens :+ OperatorToken(oper))
     } else if (oper == Operators.LITERAL) {
       tokens ++ Seq(LiteralToken(
         values
@@ -54,10 +56,6 @@ class DefaultTokenizer {
     }
   }
 
-  private def processList(list: Seq[Map[String, Any]], tokens: Seq[Any]): Seq[Any] = {
-    list.foldLeft(tokens)((acc, map) => jsonParse(map, acc))
-  }
-
   private def jsonParse(parsed: Any, tokens: Seq[Any]): Seq[Any] = {
     parsed match {
       case map: Map[_, _] => {
@@ -68,7 +66,7 @@ class DefaultTokenizer {
       case list: Seq[_] => {
         val typedList = list.asInstanceOf[List[Map[String, Any]]]
 
-        processList(typedList, tokens)
+        typedList.foldLeft(tokens)((acc, map) => processMap(map, acc))
       }
     }
   }
