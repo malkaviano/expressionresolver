@@ -1,7 +1,5 @@
 package malkaviano.resolvers
 
-import malkaviano.parsers.DefaultParser
-import malkaviano.tokenizers.DefaultTokenizer
 import org.joda.time.DateTime
 import org.scalatest.{FunSpec, Matchers}
 
