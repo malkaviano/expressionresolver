@@ -62,7 +62,7 @@ class DefaultTokenizer {
         processMap(typedMap, tokens)
       }
       case list: Seq[_] => {
-        val typedList = list.asInstanceOf[List[Map[String, Any]]]
+        val typedList = list.asInstanceOf[Seq[Map[String, Any]]]
 
         typedList.foldLeft(tokens)((acc, map) => processMap(map, acc))
       }
