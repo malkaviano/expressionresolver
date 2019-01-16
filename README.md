@@ -17,7 +17,7 @@ Given a case class
                         commendations: Int
                       )
 </code>
-
+<br>
 And a collection
 
 <code>
@@ -28,7 +28,7 @@ Seq(
         Something("Juliana", None, 50),
       )
 </code>
-
+<br>
 The following json will filter only Camilla record
 
 <code>
@@ -53,9 +53,9 @@ The following json will filter only Camilla record
  ]
 }
 </code>
-
+<br>
 This is a POC, it's not intended to be used in production as it is
-
+<br>
 TODO:
 
 => Better design
