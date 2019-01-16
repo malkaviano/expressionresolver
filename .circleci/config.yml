@@ -25,7 +25,7 @@ jobs:
           key: expressionresolver-cache
       - run:
           name: Compile expressionresolver
-          command: cat /dev/null | sbt clean
+          command: cat /dev/null | sbt clean compile test
       #- store_artifacts: # for display in Artifacts: https://circleci.com/docs/2.0/artifacts/
       #    path: target/universal/expressionresolver.zip
       #    destination: expressionresolver
@@ -35,6 +35,7 @@ jobs:
             - "~/.ivy2/cache"
             - "~/.sbt"
             - "~/.m2"
-      - deploy:
-          command: |
-            sbt deploy
+      #- deploy:
+      #    command: |
+      #      mv target/universal/samplescala.zip $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD
+      #        aws s3 cp $CIRCLE_ARTIFACTS/$ARTIFACT_BUILD s3://samplescala.blogs/builds/ --metadata {\"git_sha1\":\"$CIRCLE_SHA1\"}
