@@ -13,7 +13,7 @@ class DefaultTokenizer {
     jsonParse(parsed, Seq.empty[Any])
   }
 
-  private def extractToken(oper: String, values: Any, tag: Option[String] = None, tokens: Seq[Any]): Seq[Any] = {
+  private def extractToken(oper: String, values: Any, tag: Option[String], tokens: Seq[Any]): Seq[Any] = {
     if (Seq(Operators.AND, Operators.OR, Operators.NOT, Operators.EQ, Operators.LESS).contains(oper)) {
       OperatorToken(oper)
 
