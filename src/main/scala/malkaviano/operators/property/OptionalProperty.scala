@@ -1,18 +1,10 @@
 package malkaviano.operators.property
 
-import malkaviano.helpers.ReflectionHelper
 import malkaviano.operators.Operator
+import malkaviano.proxies.Proxying
 
-import scala.reflect.ClassTag
-
-case class OptionalProperty[A : ClassTag](property: String, obj: Any) extends Operator[Option[A]] {
+case class OptionalProperty[A](property: String, obj: Proxying) extends Operator[Option[A]] {
   override def evaluate: Option[A] = {
-    val result = ReflectionHelper.propertyValue(property, obj)
-
-    result match {
-      case v: A => Option(v)
-      case v: Option[A] => v
-      case _ =>  Option.empty[A]
-    }
+    obj.valueOf(property)
   }
 }

@@ -1,14 +1,15 @@
 package malkaviano.resolvers
 
 import malkaviano.parsers.DefaultParser
+import malkaviano.proxies.{DefaultProxy}
 import malkaviano.tokenizers.DefaultTokenizer
 
 class DefaultResolver(json: String) {
   val tokens = new DefaultTokenizer().generate(json)
+  val proxy = new DefaultProxy
+  val parser = new DefaultParser(proxy).parse(tokens)
 
-  def result(obj: Any): Boolean = {
-    val parser = new DefaultParser(obj).parse(tokens)
+  def resolve: Boolean = parser.evaluate
 
-    parser.evaluate
-  }
+  def changeProxied(obj: Any): Unit = proxy.setObject(obj)
 }

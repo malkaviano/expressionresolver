@@ -4,6 +4,7 @@ import malkaviano.operators.comparison.{EqualToOperator, LessThanOperator}
 import malkaviano.operators.logical.{AndOperator, NotOperator}
 import malkaviano.operators.property.OptionalProperty
 import malkaviano.operators.value.Literal
+import malkaviano.proxies.{Proxying}
 import malkaviano.tokens._
 import org.joda.time.DateTime
 import org.scalatest.{FunSpec, Matchers}
@@ -11,9 +12,10 @@ import org.scalatest.{FunSpec, Matchers}
 class DefaultParserSpec extends FunSpec with Matchers {
   val date = DateTime.parse("1990-01-01T00:00:00Z")
 
-  case class Obj(name: String, age: Option[Int], birth: DateTime)
 
-  val obj = Obj("xpto", Option(10), date)
+  val obj = new Proxying {
+    override def valueOf[A](name: String): Option[A] = ???
+  }
 
   describe("Parsing tokens") {
     it("returns a expression tree to evaluate") {
@@ -32,12 +34,12 @@ class DefaultParserSpec extends FunSpec with Matchers {
       val expected = AndOperator(
         LessThanOperator(
           Literal(4),
-          OptionalProperty[Int]("age", obj)
+          OptionalProperty("age", obj)
         ),
         NotOperator(
           EqualToOperator(
             Literal(date),
-            OptionalProperty[DateTime]("birth", obj)
+            OptionalProperty("birth", obj)
           )
         )
       )
@@ -64,7 +66,7 @@ class DefaultParserSpec extends FunSpec with Matchers {
       }
     }
 
-    describe("when Literal token type is wrong and cannot be coerced") {
+    describe("when token type is wrong and cannot be coerced") {
       it("throw a exception") {
         val tokens = Seq(
           OperatorToken(Operators.AND),
