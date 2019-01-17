@@ -5,6 +5,7 @@ import malkaviano.operators.logical.{AndOperator, NotOperator, OrOperator}
 import malkaviano.operators.property.OptionalProperty
 import malkaviano.operators.{BooleanOperator, Operator}
 import malkaviano.operators.value.Literal
+import malkaviano.proxies.Proxying
 import malkaviano.tokens._
 import org.joda.time.{DateTime, DateTimeZone}
 import org.joda.time.format.ISODateTimeFormat
@@ -12,7 +13,7 @@ import org.joda.time.format.ISODateTimeFormat
 import scala.collection.mutable
 
 class DefaultParser(
-                     obj: Any,
+                     obj: Proxying,
                      dateParser: String => DateTime = ISODateTimeFormat.date.withZone(DateTimeZone.UTC).parseDateTime
                    ) {
   def parse(tokens: Seq[Any]): BooleanOperator = {
@@ -35,10 +36,10 @@ class DefaultParser(
       }
       case prop: PropertyToken => {
         prop.tag.toUpperCase match {
-          case Tags.TEXT => textOperands.push(OptionalProperty[String](prop.name, obj))
-          case Tags.NUMBER => numericOperands.push(OptionalProperty[Int](prop.name, obj))
-          case Tags.DECIMAL => decimalOperands.push(OptionalProperty[Double](prop.name, obj))
-          case Tags.DATE => dateOperands.push(OptionalProperty[DateTime](prop.name, obj))
+          case Tags.TEXT => textOperands.push(OptionalProperty(prop.name, obj))
+          case Tags.NUMBER => numericOperands.push(OptionalProperty(prop.name, obj))
+          case Tags.DECIMAL => decimalOperands.push(OptionalProperty(prop.name, obj))
+          case Tags.DATE => dateOperands.push(OptionalProperty(prop.name, obj))
         }
       }
       case oper: OperatorToken => {
