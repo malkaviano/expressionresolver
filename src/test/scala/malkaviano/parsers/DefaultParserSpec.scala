@@ -15,6 +15,8 @@ class DefaultParserSpec extends FunSpec with Matchers {
 
   val obj = new Proxying {
     override def valueOf[A](name: String): Option[A] = ???
+
+    override def setObject(obj: Any): Unit = ???
   }
 
   describe("Parsing tokens") {

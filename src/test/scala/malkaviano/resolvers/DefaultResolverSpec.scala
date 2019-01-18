@@ -1,6 +1,5 @@
 package malkaviano.resolvers
 
-import malkaviano.proxies.DefaultProxy
 import org.joda.time.DateTime
 import org.scalatest.{FunSpec, Matchers}
 
@@ -48,12 +47,14 @@ class DefaultResolverSpec extends FunSpec with Matchers {
         Something("Camilla", Option(DateTime.parse("1900-12-30")), 5)
       )
 
-      val resolver = new DefaultResolver(json)
+      val resolver = ResolverBuilder.build.construct
+
+      val expr = resolver.expression(resolver.tokens(json))
 
       val result = collection.filter(r => {
-        resolver.changeProxied(r)
+        resolver.setProxiedObject(r)
 
-        resolver.resolve
+        expr.evaluate
       })
 
       result shouldBe expected

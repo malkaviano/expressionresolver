@@ -4,10 +4,10 @@ import malkaviano.tokens.{LiteralToken, OperatorToken, Operators, PropertyToken}
 import org.json4s._
 import org.json4s.jackson.JsonMethods._
 
-class DefaultTokenizer {
+class DefaultTokenizer extends Tokenizer {
   implicit val formats = org.json4s.DefaultFormats
 
-  def generate(json: String): Seq[Any] = {
+  override def generate(json: String): Seq[Any] = {
     val parsed = parse(json).extract[Map[String, Any]]
 
     jsonParse(parsed, Seq.empty[Any])

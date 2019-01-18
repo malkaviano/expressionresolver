@@ -1,7 +1,6 @@
 package malkaviano.helpers
 
 import scala.annotation.tailrec
-import scala.reflect.ClassTag
 
 object ReflectionHelper {
   def fieldValue(property: String, obj: Any): AnyRef = {
@@ -15,7 +14,7 @@ object ReflectionHelper {
   }
 
   @tailrec
-  def anyRefToOption[A : ClassTag](value: AnyRef): Option[A] = {
+  def anyRefToOption[A](value: AnyRef): Option[A] = {
     value match {
       case v: Option[_] => {
         try {

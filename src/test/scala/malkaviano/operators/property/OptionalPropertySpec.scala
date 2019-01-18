@@ -1,6 +1,6 @@
 package malkaviano.operators.property
 
-import malkaviano.proxies.Proxying
+import malkaviano.helpers.TestHelpers
 import org.joda.time.DateTime
 import org.scalatest.{FunSpec, Matchers}
 
@@ -9,17 +9,15 @@ class OptionalPropertySpec extends FunSpec with Matchers  {
   describe("Evaluating") {
     case class Fake(date: Option[DateTime], str: String)
 
-    val date = Some(DateTime.parse("1990-01-01"))
+    val date = DateTime.parse("1990-01-01")
 
 
     describe("when value exists") {
       describe("when it is an Option field") {
         it("returns the Field") {
-          val fake = new Proxying {
-            override def valueOf[A](name: String): Option[A] = date.asInstanceOf[Option[A]]
-          }
+          val fake = TestHelpers.proxyingStub(date)
 
-          val expected = date
+          val expected = Option(date)
 
           val result = OptionalProperty("date", fake).evaluate
 
@@ -29,9 +27,7 @@ class OptionalPropertySpec extends FunSpec with Matchers  {
 
       describe("when it is not an Option Field") {
         it("returns the Field") {
-          val fake = new Proxying {
-            override def valueOf[A](name: String): Option[A] = Option("wrong").asInstanceOf[Option[A]]
-          }
+          val fake = TestHelpers.proxyingStub("wrong")
 
           val expected = Option("wrong")
 
@@ -44,9 +40,7 @@ class OptionalPropertySpec extends FunSpec with Matchers  {
 
     describe("when value does not exist") {
       it("returns None") {
-        val fake = new Proxying {
-          override def valueOf[A](name: String): Option[A] = Option.empty[A]
-        }
+        val fake = TestHelpers.proxyingStub(null)
 
         val expected = Option.empty[DateTime]
 

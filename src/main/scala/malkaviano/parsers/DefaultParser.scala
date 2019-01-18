@@ -12,11 +12,11 @@ import org.joda.time.format.ISODateTimeFormat
 
 import scala.collection.mutable
 
-class DefaultParser(
-                     obj: Proxying,
-                     dateParser: String => DateTime = ISODateTimeFormat.date.withZone(DateTimeZone.UTC).parseDateTime
-                   ) {
-  def parse(tokens: Seq[Any]): BooleanOperator = {
+class DefaultParser (
+                      proxy: Proxying,
+                      dateParser: String => DateTime = ISODateTimeFormat.date.withZone(DateTimeZone.UTC).parseDateTime
+                   ) extends Parsing {
+  override def parse(tokens: Seq[Any]): BooleanOperator = {
     val reversed = tokens.reverse
 
     val operators = new mutable.ArrayStack[BooleanOperator]
@@ -36,10 +36,10 @@ class DefaultParser(
       }
       case prop: PropertyToken => {
         prop.tag.toUpperCase match {
-          case Tags.TEXT => textOperands.push(OptionalProperty(prop.name, obj))
-          case Tags.NUMBER => numericOperands.push(OptionalProperty(prop.name, obj))
-          case Tags.DECIMAL => decimalOperands.push(OptionalProperty(prop.name, obj))
-          case Tags.DATE => dateOperands.push(OptionalProperty(prop.name, obj))
+          case Tags.TEXT => textOperands.push(OptionalProperty(prop.name, proxy))
+          case Tags.NUMBER => numericOperands.push(OptionalProperty(prop.name, proxy))
+          case Tags.DECIMAL => decimalOperands.push(OptionalProperty(prop.name, proxy))
+          case Tags.DATE => dateOperands.push(OptionalProperty(prop.name, proxy))
         }
       }
       case oper: OperatorToken => {
@@ -83,4 +83,6 @@ class DefaultParser(
 
     operators.pop
   }
+
+  def changeProxiedObject(obj: Any): Unit = proxy.setObject(obj)
 }
