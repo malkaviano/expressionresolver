@@ -49,7 +49,7 @@ class DefaultResolverSpec extends FunSpec with Matchers {
 
       val resolver = ResolverBuilder.build.construct
 
-      val expr = resolver.expression(resolver.tokens(json))
+      val expr = resolver.expression(json)
 
       val result = collection.filter(r => {
         resolver.setProxiedObject(r)
