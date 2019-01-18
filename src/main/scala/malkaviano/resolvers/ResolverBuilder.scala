@@ -16,9 +16,7 @@ class ResolverBuilder private(
 }
 
 object ResolverBuilder {
-  private val resolverBuilder: Option[ResolverBuilder] = None
-
   def build: ResolverBuilder = {
-    resolverBuilder.getOrElse(new ResolverBuilder(new DefaultTokenizer, new DefaultParser(new DefaultProxy)))
+    new ResolverBuilder(new DefaultTokenizer, new DefaultParser(new DefaultProxy))
   }
 }
